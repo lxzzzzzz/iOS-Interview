@@ -51,7 +51,7 @@
     return _number;
 }
 
-```
+  ```
 
 ```objc
 @protocol ProtocolA <NSObject>
@@ -220,7 +220,7 @@ load放在会在第一次加载类方法会调用，调用顺序是先父类，�
 <details>
 <summary>查看答案</summary>
 可以通过KVC或者通过ivar进行访问。
-	
+
 - 类实现
 
 ```objc
@@ -311,7 +311,7 @@ NSLog(@"number = %@",object_getIvar(a, var));
 # 请说明并比较以下关键词：__weak，__block
 <details>
 <summary>查看答案</summary>
-	
+
 - __weak用来修饰实例变量
 - __block用来修饰可以在block内部修改外部变量
 </details>
@@ -359,14 +359,16 @@ OC并不存在严格来说的私有方法和私有变量。对于用@public修�
 # 关键字const什么含义
 <details>
 <summary>查看答案</summary>
-	
+    对于const来说 声明在谁前面就意味着谁不能修改，如果`const`在第一位则向右移一位。比如`int const a`等效果于`const int a`都是让整形的`a`不可变。声明`const`可以让编译时候代码更紧凑，让系统修改变量时候随时产生报错，防止BUG的产生。
+</details>
 对于const来说 声明在谁前面就意味着谁不能修改，如果`const`在第一位则向右移一位。比如`int const a`等效果于`const int a`都是让整形的`a`不可变。声明`const`可以让编译时候代码更紧凑，让系统修改变量时候随时产生报错，防止BUG的产生。
 </details>
 
 # tableView的重用机制？
 <details>
 <summary>查看答案</summary>
-	
+    `UITableView`有两个实例变量，`visiableCells`保存当前界面显示的Cell的数组，`reusableTableCells`保存在可以重用的Cell的字典。当第一次加载界面，`reusableTableCells`没有任何重用的Cell就会走`UITableViewCell`的初始化方法进行创建，之后添加到`visiableCells`数组里面。当界面滚动时候，原本展示的Cell消失在屏幕之后。对应的`Cell`对象就会添加到`reusableTableCells`里面，即而从`visiableCells`数组里面进行移出。当一个新的cell将展示时候从`reusableTableCells`查看是否存在重用的，如果存在就展示重用的，如果没有就重新走创建的流程。
+</details>
 `UITableView`有两个实例变量，`visiableCells`保存当前界面显示的Cell的数组，`reusableTableCells`保存在可以重用的Cell的字典。当第一次加载界面，`reusableTableCells`没有任何重用的Cell就会走`UITableViewCell`的初始化方法进行创建，之后添加到`visiableCells`数组里面。当界面滚动时候，原本展示的Cell消失在屏幕之后。对应的`Cell`对象就会添加到`reusableTableCells`里面，即而从`visiableCells`数组里面进行移出。当一个新的cell将展示时候从`reusableTableCells`查看是否存在重用的，如果存在就展示重用的，如果没有就重新走创建的流程。
 </details>
 
@@ -380,21 +382,21 @@ OC并不存在严格来说的私有方法和私有变量。对于用@public修�
 # delegate和notification区别，分别在什么情况下使用？
 <details>
 <summary>查看答案</summary>
-	
+
 `delegate`是一对一的关系，`notification`是一对多的关系。`delegate`通畅用于开放接口用于其他模块的调用，`notification`可以做到模块分离，通畅用于模块之间的通信。
 </details>
 
 # id、nil代表什么？
 <details>
 <summary>查看答案</summary>
-	
+
 `id`代表在`OC`里面的对象的指针，`nil`代表是指针指向一个空的对象。
 </details>
 
 # timer的间隔周期准吗？为什么？怎样实现一个精准的timer?
 <details>
 <summary>查看答案</summary>
-	
+
 `NSTimer`因为是添加到`runloop`中的走的是默认的`mode`，当滑动表格的时候就会切换对应`mode`停止`timer`。`runloop`因为优先在触发时候执行输入源，才会执行`runloop`中的任务，虽有会有`50-100`毫秒的误差。
 
 我们想做一个精准的`timer`就需要创建一个新的`runloop`来不受其他输入源的影响。
@@ -436,8 +438,7 @@ dispatch_resume(timer);
 # 一个 NSObject 对象占用多少内存？
 <details>
 <summary>查看答案</summary>
-	
-系统分配18个字节，但是真正占用只有8个字节。
+系统分配了16个字节给NSObject对象（通过malloc_size函数获得），但NSObject对象内部只使用了8个字节的空间（64bit环境下，可以通过class_getInstanceSize函数获得）。
 </details>
 
 # 方法和选择器有何不同？(Difference between method and selector?)
@@ -450,7 +451,7 @@ dispatch_resume(timer);
 # 你是否接触过OC中的反射机制？简单聊一下概念和使用
 <details>
 <summary>查看答案</summary>
-	
+
 反射机制就是通过字符串反射为对应的类，协议，方法。或者将协议，方法或者类反射为字符串。通常用于做模块化跳转，或者用于做`deeplink`等运行时创建类等功能。
 </details>
 
@@ -465,7 +466,7 @@ dispatch_resume(timer);
 
 <details>
 <summary>查看答案</summary>
-  
+
   通知底层核心是存在一个`notication_map`的字典，通知的名称作为`Key`，`Value`为数组结构，数组的每个元素包含了监听的对象，方法名称，还有传递的参数。当发送通知的时候，会在`notication_map`的字典当中找到对应`key`的数组，通过遍历数组，对数组里面所有的监听者发送通知。当发送参数和监听的参数不一样的时候，会被忽略，这就是为什么名字相同却收不到通知。
 
 - 当接受通知的参数为空可以接受发送通知参数为空或者不为空
@@ -505,7 +506,7 @@ dispatch_resume(timer);
 
 <details>
 <sunmary>查看答案</summary>
-	
+
   `KVO`系统通过`isa混淆`技术通过创建类的不可见子类，通过重写`set`和`get`方法来实现监听机制的。对于没有调用`set`和`get`方法是调用不了监听机制的，需要手动调用`willChangeValueForKey`和`didChangeValueForKey`触发。
 
 </details>
