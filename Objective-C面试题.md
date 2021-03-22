@@ -510,6 +510,18 @@ dispatch_resume(timer);
 
 </details>
 
+
+
+# 直接修改成员变量会触发KVO么？
+
+<details>
+<sunmary>查看答案</summary>
+
+
+  不会触发KVO
+
+</details>
+
 # 能否向已经编译的类添加实例变量
 
 <details>
