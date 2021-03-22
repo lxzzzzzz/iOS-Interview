@@ -444,7 +444,6 @@ dispatch_resume(timer);
 # 方法和选择器有何不同？(Difference between method and selector?)
 <details>
 <summary>查看答案</summary>
-
 `selector`只是代表方法名称，而`method`包含了名称和实现。
 </details>
 
@@ -517,6 +516,19 @@ dispatch_resume(timer);
 <summary>查看答案</summary>
 
  不能，因为编译之后类的内存大小已经固定不能再添加实例变量，但是可以动态的添加实例变量。 
+
+</details>
+
+
+
+# OC的类信息存放在哪里？
+
+<details>
+<summary>查看答案</summary>
+
+对象方法、属性、成员变量、协议信息，存放在class对象中
+类方法，存放在meta-class对象中
+成员变量的具体值，存放在instance对象
 
 </details>
 
