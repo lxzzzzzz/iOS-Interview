@@ -50,7 +50,6 @@
 
 <details>
 <summary>查看答案</summary>
-
 `Block`是对象，封装了一块代码，可以在任何时候运行。`Block`可以作为方法参数，也可以作为方法返回值。自己又带有参数和返回值，和代理的功能相同。
 </details>
 
@@ -73,7 +72,7 @@
 
 <details>
 <summary>查看答案</summary>
-
 `__block` 修饰的变量可以在`Block`内部进行修改，`__weak`修饰的对象可以在`Block`使用防止循环引用。
 
 </details>
+
